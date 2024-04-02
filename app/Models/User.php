@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /// relacionamento One to One
+    /// relacionamento One to One //
 
     public function preference()
     {
