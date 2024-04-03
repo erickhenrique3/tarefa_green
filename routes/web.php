@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Course;
+use App\Models\Module;
 use App\Models\User;
 use App\Models\Preference;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +17,42 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//One to many
+
+Route::get('/One-to-many', function(){
+    //  $course = Course::create(['name'=> 'Curso de laravel']);
+    $course = Course::first();
+
+    $data = [
+        'name' => 'Modulo 001',
+    ];
+
+    $course->modules()->create($data);
+
+    //  $course->modules()->get();
+    // Module::find(2)->update();
+    $modules = $course->modules;
+
+    
+
+    dd($modules);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//one-to-onee//
 Route::get('/one-to-one', function () {
     $user = User::first();
     
