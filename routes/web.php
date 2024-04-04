@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 //One to many
 
 Route::get('/One-to-many', function(){
-    //  $course = Course::create(['name'=> 'Curso de laravel']);
+      $course = Course::create(['name'=> 'Curso de laravel']);
     $course = Course::with('modules.lessons')->first();
 
     dd($course);
@@ -39,7 +39,7 @@ Route::get('/One-to-many', function(){
         'name' => 'Modulo 001'
     ];
 
-    // $course->modules()->create($data);
+     $course->modules()->create($data);
 
     //  $course->modules()->get();
     // Module::find(2)->update();
