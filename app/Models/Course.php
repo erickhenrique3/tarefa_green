@@ -14,7 +14,12 @@ class Course extends Model
         'avaliable',
     ];
 
-    public function modules(){
+    public function modules()
+    {
         return $this->hasMany(Module::class);
+    }
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

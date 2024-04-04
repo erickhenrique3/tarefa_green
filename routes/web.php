@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Course;
+use App\Models\Image;
 use App\Models\Module;
 use App\Models\Permission;
 use App\Models\User;
@@ -17,17 +18,37 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// one to one polymorphicf
+
+Route::get('/one-to-one-polymorphic', function () {
+    $user = User::first();
+    $data = ['path' => 'path/nome-image-2png'];
+
+
+    if ($user->image) {
+        $user->image->update($data);
+    } else {
+        $user->image()->create($data);
+    }
+
+
+    dd($user->image);
+});
+
+
+
+
 //Many to many
 
-Route::get('/Many-to-many', function(){
-      $user = User::with('permissions')->find(1);
+Route::get('/Many-to-many', function () {
+    $user = User::with('permissions')->find(1);
 
-      $permission = Permission::find(1);
-      $user->permissions()->save($permission);
+    $permission = Permission::find(1);
+    $user->permissions()->save($permission);
 
-      $user->refresh();
+    $user->refresh();
 
-      dd($user->permissions);
+    dd($user->permissions);
 });
 
 
@@ -35,34 +56,33 @@ Route::get('/Many-to-many', function(){
 
 //One to many
 
-Route::get('/One-to-many', function(){
-      $course = Course::create(['name'=> 'Curso de laravel']);
+Route::get('/One-to-many', function () {
+    $course = Course::create(['name' => 'Curso de laravel']);
     $course = Course::with('modules.lessons')->first();
 
     dd($course);
 
-      echo $course->name;
-      echo '<br>';
-      foreach($course->modules as $module){
-      echo "Modulo {$module->name} <br>";
+    echo $course->name;
+    echo '<br>';
+    foreach ($course->modules as $module) {
+        echo "Modulo {$module->name} <br>";
 
-        foreach($module->lessons as $lesson){
-        
-        echo "Aula {$lesson->name} <br>";
-        
+        foreach ($module->lessons as $lesson) {
+
+            echo "Aula {$lesson->name} <br>";
         }
-      }
+    }
     $data = [
         'name' => 'Modulo 001'
     ];
 
-     $course->modules()->create($data);
+    $course->modules()->create($data);
 
     //  $course->modules()->get();
     // Module::find(2)->update();
     $modules = $course->modules;
 
-    
+
 
     dd($modules);
 });
@@ -72,7 +92,7 @@ Route::get('/One-to-many', function(){
 //one-to-onee//
 Route::get('/one-to-one', function () {
     $user = User::first();
-    
+
     $data = [
         'background_color' => '#0000',
     ];
