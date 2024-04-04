@@ -13,17 +13,19 @@ return new class extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('tag_id')->constrained('tags');
-            $table->morphs('teggable');
-            $table->timestamps();
-        });
-
-        Schema::create('taggbles', function (Blueprint $table) {
-            $table->id();
             $table->string('name')->unique();
             $table->string('color');
             $table->timestamps();
         });
+
+        Schema::create('taggable', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('tag_id')->constrained('tags');
+            $table->morphs('taggable');
+            $table->timestamps();
+        });
+
+       
     }
 
     /**
