@@ -7,6 +7,7 @@ use App\Models\Module;
 use App\Models\Permission;
 use App\Models\User;
 use App\Models\Preference;
+use App\Models\Tag;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,28 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+/// many to many
+
+
+Route::get('/many-to-many-polymorphic', function(){
+    // $user = User::first();
+
+    // Tag::create(['name' => 'tag1', 'color' => 'red']);
+    // Tag::create(['name' => 'tag2', 'color' => 'ped']);
+    // Tag::create(['name' => 'tag3', 'color' => 'ced']);
+
+
+   $tag = Tag::where('name', 'tag3')->first();
+
+
+    dd($tag->users);
+});
+
+
+
+
+
 //one to many polymorphic
 
 
