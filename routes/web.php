@@ -21,13 +21,25 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/One-to-many', function(){
     //  $course = Course::create(['name'=> 'Curso de laravel']);
-    $course = Course::first();
+    $course = Course::with('modules.lessons')->first();
 
+    dd($course);
+
+      echo $course->name;
+      echo '<br>';
+      foreach($course->modules as $module){
+      echo "Modulo {$module->name} <br>";
+
+        foreach($module->lessons as $lesson){
+        echo "Aula {$lesson->name} <br>";
+        
+        }
+      }
     $data = [
-        'name' => 'Modulo 001',
+        'name' => 'Modulo 001'
     ];
 
-    $course->modules()->create($data);
+    // $course->modules()->create($data);
 
     //  $course->modules()->get();
     // Module::find(2)->update();
