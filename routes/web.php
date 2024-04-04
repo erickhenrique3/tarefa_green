@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Comment;
 use App\Models\Course;
 use App\Models\Image;
 use App\Models\Module;
@@ -18,6 +19,27 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//one to many polymorphic
+
+
+Route::get('/one-to-many-polymorphic', function (){
+    // $course = Course::first();
+    // $course->comments()->create([
+    //     'subject' => 'Novo comentario',
+    //     'content' => 'Curso muito massa!!'
+    // ]);
+
+    // dd($course->comments);
+
+    $comment = Comment::find(1);
+    dd($comment->commentable);
+});
+
+
+
+
+
+
 // one to one polymorphicf
 
 Route::get('/one-to-one-polymorphic', function () {
