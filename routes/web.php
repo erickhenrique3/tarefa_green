@@ -2,6 +2,7 @@
 
 use App\Models\Course;
 use App\Models\Module;
+use App\Models\Permission;
 use App\Models\User;
 use App\Models\Preference;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,21 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Many to many
+
+Route::get('/Many-to-many', function(){
+      $user = User::with('permissions')->find(1);
+
+      $permission = Permission::find(1);
+      $user->permissions()->save($permission);
+
+      $user->refresh();
+
+      dd($user->permissions);
+});
+
+
+
 
 //One to many
 
@@ -31,6 +47,7 @@ Route::get('/One-to-many', function(){
       echo "Modulo {$module->name} <br>";
 
         foreach($module->lessons as $lesson){
+        
         echo "Aula {$lesson->name} <br>";
         
         }
@@ -49,18 +66,6 @@ Route::get('/One-to-many', function(){
 
     dd($modules);
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
